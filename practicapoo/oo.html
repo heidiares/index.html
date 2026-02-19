@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Visualización Dinámica</title>
+</head>
+<body>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            text-align: center;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input.error {
+            border: 2px solid #ff4d4f;
+            box-shadow: 0 0 4px rgba(255,77,79,0.3);
+        }
+        button {
+            padding: 8px 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+    <h2>Formulario de Registro</h2>
+    <form id="miFormulario">
+        Nombre: <input type="text" id="nombre"><br><br>
+        Edad: <input type="number" id="edad"><br><br>
+        Correo: <input type="email" id="correo"><br><br>
+        <button type="button" onclick="mostrarDatos()">Mostrar Datos</button>
+        <button type="button" onclick="limpiarDatos()">Limpiar</button>
+    </form>
+    <h3>Datos ingresados:</h3>
+    <div id="resultado"></div>
+<script>
+function mostrarDatos() {
+    var nombreEl = document.getElementById("nombre");
+    var edadEl = document.getElementById("edad");
+    var correoEl = document.getElementById("correo");
+    var nombre = nombreEl.value.trim();
+    var edad = edadEl.value.trim();
+    var correo = correoEl.value.trim();
+
+    // limpiar estilos de error previos
+    [nombreEl, edadEl, correoEl].forEach(function(el){ el.classList.remove('error'); });
+
+    var faltan = [];
+    if (!nombre) { faltan.push('Nombre'); nombreEl.classList.add('error'); }
+    if (!edad) { faltan.push('Edad'); edadEl.classList.add('error'); }
+    if (!correo) { faltan.push('Correo'); correoEl.classList.add('error'); }
+
+    var resultadoEl = document.getElementById("resultado");
+    if (faltan.length > 0) {
+        resultadoEl.innerHTML = 'Faltan campos: ' + faltan.join(', ');
+        resultadoEl.style.color = 'red';
+        // enfocar el primer campo vacío
+        if (!nombre) nombreEl.focus(); else if (!edad) edadEl.focus(); else correoEl.focus();
+        return;
+    }
+
+    resultadoEl.innerHTML =
+        "Nombre: " + nombre + "<br>" +
+        "Edad: " + edad + "<br>" +
+        "Correo: " + correo;
+    resultadoEl.style.color = "blue";
+    console.log("Nombre:", nombre);
+    console.log("Edad:", edad);
+    console.log("Correo:", correo);
+}
+
+function limpiarDatos() {
+    document.getElementById("resultado").innerHTML = "";
+    document.getElementById("resultado").style.color = '';
+    ['nombre','edad','correo'].forEach(function(id){
+        var el = document.getElementById(id);
+        el.value = '';
+        el.classList.remove('error');
+    });
+    document.getElementById('nombre').focus();
+}
+</script>
+</body>
+</html>
