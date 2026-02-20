@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Serie Numérica con Validación</title>
+</head>
+<body>
+<h2>Serie Numérica con Validación</h2>
+<label>Ingresa un número entero positivo:</label><br>
+<input type="number" id="numero">
+<br><br>
+<button onclick="procesarNumero()">Procesar</button>
+<div id="resultado"></div>
+<script>
+function procesarNumero(){
+    // Obtener valor ingresado
+    let valor = document.getElementById("numero").value;
+    // Convertir a número
+    let n = Number(valor);
+    // Validaciones
+    if(valor === "" || !(n) || !Number.isInteger(n) || n <= 0){
+        document.getElementById("resultado").innerHTML =
+        "<p style='color:red;'>Error: Ingresa un número entero positivo válido.</p>";
+        return;
+    }
+    let suma = 0;
+    let serie = "";
+    // Ciclo for para generar serie y suma
+    for(let i = 1; i <= n; i++){
+        serie += i + " ";
+        suma += i;
+    }
+    // Determinar si es par o impar
+    let tipo = (n % 2 === 0) ? "Par" : "Impar";
+    // Mostrar resultados
+    document.getElementById("resultado").innerHTML =
+    "<p><strong>Serie:</strong> " + serie + "</p>" +
+    "<p><strong>Suma total:</strong> " + suma + "</p>" +
+    "<p><strong>El número es:</strong> " + tipo + "</p>";
+}
+</script>
+</body>
+</html>
