@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica - Uso de Ciclos en JavaScript</title>
+ </head>
+<body>
+    <h1>Práctica: Uso de Ciclos en JavaScript</h1>
+    <!-- EJERCICIO 1 -->
+    <div class="contenedor">
+        <h2>Ejercicio 1: Sumatoria</h2>
+        <label>Ingresa un número:</label><br>
+        <input type="number" id="numeroSumatoria">
+        <br>
+        <button onclick="calcularSumatoria()">Calcular Sumatoria</button>
+        <div id="resultadoSumatoria" class="resultado"></div>
+    </div>
+    <!-- EJERCICIO 2 -->
+    <div class="contenedor">
+        <h2>Ejercicio 2: Factorial</h2>
+        <label>Ingresa un número:</label><br>
+        <input type="number" id="numeroFactorial">
+        <br>
+        <button onclick="calcularFactorial()">Calcular Factorial</button>
+        <div id="resultadoFactorial" class="resultado"></div>
+    </div>
+<script>
+// EJERCICIO 1 - SUMATORIA CON FOR
+function calcularSumatoria(){
+    let n = parseInt(document.getElementById("numeroSumatoria").value);
+    if(!(n) || n < 0){
+        document.getElementById("resultadoSumatoria").innerHTML = "Por favor ingresa un número válido mayor o igual a 0.";
+        return;
+    }
+    let suma = 0;
+    for(let i = 1; i <= n; i++){
+        suma += i;
+    }
+    document.getElementById("resultadoSumatoria").innerHTML =
+        "La sumatoria desde 1 hasta " + n + " es: " + suma;
+}
+// EJERCICIO 2 - FACTORIAL CON WHILE
+function calcularFactorial(){
+    let numero = parseInt(document.getElementById("numeroFactorial").value);
+
+    if(!(numero) || numero < 0){
+        document.getElementById("resultadoFactorial").innerHTML = "Por favor ingresa un número válido mayor o igual a 0.";
+        return;
+    }
+    let factorial = 1;
+    let i = numero;
+    while(i > 1){
+        factorial *= i;
+        i--;
+    }
+    document.getElementById("resultadoFactorial").innerHTML =
+        "El factorial de " + numero + " es: " + factorial;
+}
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Serie Numérica con Validación</title>
+</head>
+<body>
+<h2>Serie Numérica con Validación</h2>
+<label>Ingresa un número entero positivo:</label><br>
+<input type="number" id="numero">
+<br><br>
+<button onclick="procesarNumero()">Procesar</button>
+<div id="resultado"></div>
+<script>
+function procesarNumero(){
+    // Obtener valor ingresado
+    let valor = document.getElementById("numero").value;
+    // Convertir a número
+    let n = Number(valor);
+    // Validaciones
+    if(valor === "" || !(n) || !Number.isInteger(n) || n <= 0){
+        document.getElementById("resultado").innerHTML =
+        "<p style='color:red;'>Error: Ingresa un número entero positivo válido.</p>";
+        return;
+    }
+    let suma = 0;
+    let serie = "";
+    // Ciclo for para generar serie y suma
+    for(let i = 1; i <= n; i++){
+        serie += i + " ";
+        suma += i;
+    }
+    // Determinar si es par o impar
+    let tipo = (n % 2 === 0) ? "Par" : "Impar";
+    // Mostrar resultados
+    document.getElementById("resultado").innerHTML =
+    "<p><strong>Serie:</strong> " + serie + "</p>" +
+    "<p><strong>Suma total:</strong> " + suma + "</p>" +
+    "<p><strong>El número es:</strong> " + tipo + "</p>";
+}
+</script>
+</body>
+</html>
