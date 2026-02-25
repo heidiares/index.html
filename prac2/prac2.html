@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora Web Inteligente</title>
     <link rel="stylesheet" href="prac2.css">
 </head>
 <body>
@@ -22,127 +22,10 @@
         <div id="error" class="error"></div>
         <!-- Resultado -->
         <div id="resultado" class="resultado"></div>
-        <button onclick="calcular()">Calcular</button>
-        <button onclick="limpiar()">Limpiar</button>
+        <button id="btnCalcular">Calcular</button>
+        <button id="btnLimpiar">Limpiar</button>
     </div>
-    <script>
-
-function mostrarCampos() {
-    const operacion = document.getElementById("operacion").value;
-    const campos = document.getElementById("campos");
-    campos.innerHTML = "";
-    limpiarMensajes();
-
-    if (operacion === "triangulo") {
-        campos.innerHTML = `
-            <input type="number" id="base" placeholder="Base">
-            <input type="number" id="altura" placeholder="Altura">
-        `;
-    } 
-    else if (operacion === "esfera") {
-        campos.innerHTML = `
-            <input type="number" id="radio" placeholder="Radio">
-        `;
-    } 
-    else if (operacion === "divisa") {
-        campos.innerHTML = `
-            <input type="number" id="cantidad" placeholder="Cantidad en MXN">
-            <select id="moneda">
-                <option value="">Seleccione moneda</option>
-                <option value="usd">Dólar (USD)</option>
-                <option value="eur">Euro (EUR)</option>
-            </select>
-        `;
-    }
-}
-
-function validarNumero(valor, nombreCampo) {
-    if (valor === "") {
-        return "Te hizo falta ingresar: " + nombreCampo;
-    }
-    if (isNaN(valor)) {
-        return "El campo " + nombreCampo + " debe ser numérico.";
-    }
-    if (Number(valor) <= 0) {
-        return "El campo " + nombreCampo + " debe ser mayor que 0.";
-    }
-    return "";
-}
-
-function calcular() {
-    const operacion = document.getElementById("operacion").value;
-    const errorDiv = document.getElementById("error");
-    const resultadoDiv = document.getElementById("resultado");
-
-    limpiarMensajes();
-    let errorMensaje = "";
-
-    if (operacion === "triangulo") {
-        const base = document.getElementById("base").value;
-        const altura = document.getElementById("altura").value;
-
-        errorMensaje = validarNumero(base, "Base") || validarNumero(altura, "Altura");
-
-        if (!errorMensaje) {
-            const area = (Number(base) * Number(altura)) / 2;
-            resultadoDiv.innerHTML = "Área = " + area.toFixed(2);
-        }
-    }
-
-    else if (operacion === "esfera") {
-        const radio = document.getElementById("radio").value;
-
-        errorMensaje = validarNumero(radio, "Radio");
-
-        if (!errorMensaje) {
-            const volumen = (4/3) * Math.PI * Math.pow(Number(radio), 3);
-            resultadoDiv.innerHTML = "Volumen = " + volumen.toFixed(2);
-        }
-    }
-
-    else if (operacion === "divisa") {
-        const cantidad = document.getElementById("cantidad").value;
-        const moneda = document.getElementById("moneda").value;
-
-        errorMensaje = validarNumero(cantidad, "Cantidad en MXN");
-
-        if (!errorMensaje && moneda === "") {
-            errorMensaje = "Te hizo falta seleccionar la moneda.";
-        }
-
-        if (!errorMensaje) {
-            let tasa = 0;
-
-            if (moneda === "usd") {
-                tasa = 0.058;
-                resultadoDiv.innerHTML = "USD = " + (Number(cantidad) * tasa).toFixed(2);
-            } 
-            else if (moneda === "eur") {
-                tasa = 0.054;
-                resultadoDiv.innerHTML = "EUR = " + (Number(cantidad) * tasa).toFixed(2);
-            }
-        }
-    }
-
-    else {
-        errorMensaje = "Seleccione una operación.";
-    }
-
-    if (errorMensaje) {
-        errorDiv.innerHTML = errorMensaje;
-    }
-}
-
-function limpiar() {
-    document.getElementById("operacion").value = "";
-    document.getElementById("campos").innerHTML = "";
-    limpiarMensajes();
-}
-
-function limpiarMensajes() {
-    document.getElementById("error").innerHTML = "";
-    document.getElementById("resultado").innerHTML = "";
-}
-</script>
+    <!-- El script ahora se carga desde un archivo externo -->
+    <script src="index.js"></script>
 </body>
 </html>
