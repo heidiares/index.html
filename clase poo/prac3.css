@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;   
+    align-items: center;       
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fceff9, #e0f7fa);
+    background-image: url("fond.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #f4f4f4;
+}
+
+.container {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 320px;
+    max-width: 90%;
+}
+
+.container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.error {
+    color: #c00;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.resultado {
+    color: #006400;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+input, select, button {
+    width: 100%;
+    max-width: 280px;
+    padding: 8px;
+    margin: 8px auto;
+    display: block;
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+}
