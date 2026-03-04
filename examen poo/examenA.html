@@ -23,7 +23,6 @@
             for (let i = 1; i <= 3; i++) {
                 let calificacion = parseFloat(document.getElementById("cal" + i).value);
                 if (!(calificacion) || calificacion < 0 || calificacion > 10) {
-                    alert("Por favor, ingrese una calificación válida entre 0 y 10 para la calificación " + i + ".");
                     return;
                 }
                 suma += calificacion;
