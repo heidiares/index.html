@@ -1,0 +1,33 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="funciones.css">
+    <title>Document</title>
+ </head>
+ <body>
+ <h2>Función Anónima</h2> 
+        <input type="number" id="num2"> 
+        <button onclick="probarFactorial()">Calcular</button> 
+        <p id="res2"></p> 
+<script> 
+// Función anónima 
+const factorial = function(numero) { 
+    var resultado = 1; 
+    for (var i = 1; i <= numero; i++) { 
+        resultado = resultado * i; 
+    } 
+    return resultado; 
+}; 
+function probarFactorial() { 
+    var numero = document.getElementById("num2").value; 
+    if (numero === "") { 
+        document.getElementById("res2").innerHTML = "Por favor ingresa un número"; 
+    } else { 
+        document.getElementById("res2").innerHTML = factorial(numero); 
+    } 
+} 
+</script>
+</body>
+ </html>

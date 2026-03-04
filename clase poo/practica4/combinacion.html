@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="funciones.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Combinación de funciones</h2> 
+        <input type="number" id="num5"> 
+        <button onclick="iniciarProceso()">Procesar</button> 
+        <p id="res5"></p> 
+<script> 
+// Combinación de funciones 
+const duplicar = (numero) => numero * 2; 
+const procesarNumero = function(numero) { 
+    return duplicar(numero); 
+}; 
+function iniciarProceso() { 
+    var numero = document.getElementById("num5").value; 
+    if (numero === "") { 
+        document.getElementById("res5").innerHTML = "Por favor ingresa un número"; 
+    } else { 
+        document.getElementById("res5").innerHTML = procesarNumero(numero); 
+    } 
+} 
+</script> 
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="funciones.css">
+    <title>Document</title>
+</head>
+<body>
+<h2>Arrow Function</h2> 
+        <button onclick="probarArray()">Sumar [1,2,3,4,5]</button> 
+        <p id="res3"></p> 
+<script> 
+// Arrow function 
+const sumaArray = (numeros) => { 
+    var suma = 0; 
+    for (var i = 0; i < numeros.length; i++) { 
+        suma = suma + numeros[i]; 
+    } 
+    return suma; 
+}; 
+function probarArray() { 
+    var resultado = sumaArray([1,2,3,4,5]); 
+    document.getElementById("res3").innerHTML = resultado; 
+} 
+</script> 
+</body>
+</html>
