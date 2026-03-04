@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>examen "A"</h1>
+    <div>
+        <label for="cal1">Calificación 1:</label>
+        <input type="number" id="cal1" min="0" max="10"><br>
+        <label for="cal2">Calificación 2:</label>
+        <input type="number" id="cal2" min="0" max="10"><br>
+        <label for="cal3">Calificación 3:</label>
+        <input type="number" id="cal3" min="0" max="10"><br>
+        <button onclick="calcularcalificacion()">Calcular</button>
+    </div>
+    <div id="resultado"></div>
+    <script>
+        function calcularcalificacion() {            
+            let suma = 0;
+            for (let i = 1; i <= 3; i++) {
+                let calificacion = parseFloat(document.getElementById("cal" + i).value);
+                if (!(calificacion) || calificacion < 0 || calificacion > 10) {
+                    alert("Por favor, ingrese una calificación válida entre 0 y 10 para la calificación " + i + ".");
+                    return;
+                }
+                suma += calificacion;
+                console.log("Calificación " + i + ": " + calificacion);
+            }
+            let promedio = suma / 3;
+            console.log("Promedio: " + promedio);//imprimir el promedio en la consola
+            let estado = promedio >= 6 ? "Aprobó" : "Reprobó";
+            console.log("Estado: " + estado);
+            document.getElementById("resultado").innerHTML = 
+                "Promedio: " + promedio.toFixed(2) + "\n" +
+                "Resultado: " + estado;//mostrar el resultado en la página web
+        }
+    </script>
+</body>
+</html>
