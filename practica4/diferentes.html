@@ -1,0 +1,36 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="funciones.css">
+    <title>Document</title>
+ </head>
+ <body>
+ <h2>Diferentes Tipos de Funciones</h2> 
+         <input type="number" id="num4"> 
+         <button onclick="probarCuadrado()">Calcular</button> 
+         <p id="res4"></p> 
+<script> 
+// Tipos de funciones 
+function cuadradoTradicional(numero) { 
+    return numero * numero; 
+} 
+const cuadradoAnonima = function(numero) { 
+    return numero * numero; 
+}; 
+const cuadradoArrow = (numero) => numero * numero; 
+function probarCuadrado() { 
+    var numero = document.getElementById("num4").value; 
+    if (numero === "") { 
+        document.getElementById("res4").innerHTML = "Por favor ingresa un número"; 
+    } else { 
+        document.getElementById("res4").innerHTML = 
+            "Tradicional: " + cuadradoTradicional(numero) + "<br>" + 
+            "Anonima: " + cuadradoAnonima(numero) + "<br>" + 
+            "Arrow: " + cuadradoArrow(numero); 
+    } 
+} 
+</script> 
+</body>
+ </html>

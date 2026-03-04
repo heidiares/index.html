@@ -1,0 +1,36 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="funciones.css">
+    <title>Document</title>
+ </head>
+ <body>
+    
+
+ <h2>Función Tradicional</h2> 
+        <input type="number" id="num1"> 
+        <button onclick="probarPar()">Verificar</button> 
+        <p id="res1"></p> 
+<script> 
+   // Función tradicional 
+function esPar(numero) { 
+    if (numero % 2 == 0) { 
+        return "Es par"; 
+    } else { 
+        return "Es impar"; 
+    } 
+} 
+function probarPar() { 
+    var numero = document.getElementById("num1").value; 
+    if (numero === "") { 
+        document.getElementById("res1").innerHTML = "Por favor ingresa un número"; 
+    } else { 
+        document.getElementById("res1").innerHTML = esPar(numero); 
+    } 
+} 
+</script>
+
+ </body>
+ </html>
