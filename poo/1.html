@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda</title>
+</head>
+<body>
+
+<h1>Agenda pobresoft</h1>
+
+<label>Nombre:</label>
+<input type="text" id="nombre"><br>
+
+<label>Dirección:</label>
+<input type="text" id="direccion"><br>
+
+<label>Teléfono:</label>
+<input type="text" id="telefono"><br>  
+
+<label>Email:</label>
+<input type="email" id="email"><br>  
+
+<label>URL Foto:</label>
+<input type="text" id="urlFoto"><br>
+
+<button onclick="guardarDatos()">Guardar</button>
+
+<br><br>
+
+<input type="text" id="busqueda" placeholder="Buscar" onkeyup="buscar()">
+
+<p>Total contactos: <span id="contador">0</span></p>
+
+<div id="listado"></div>
+
+<dialog id="miModal">
+
+<label>Nombre:</label>
+<input type="text" id="enombre"><br>
+
+<label>Dirección:</label>
+<input type="text" id="edireccion"><br>
+
+<label>Teléfono:</label>
+<input type="text" id="etelefono"><br>
+
+<label>Email:</label>
+<input type="email" id="eemail"><br>
+
+<label>URL Foto:</label>
+<input type="text" id="eurlFoto"><br>
+
+<button onclick="guardarEditar()">Guardar</button>
+<button onclick="cerrarModal()">Cancelar</button>
+
+</dialog>
+
+<script>
+
+let agenda=[]
+let indice=-1
+
+function GuardarLocal(){
+    localStorage.setItem("agenda", JSON.stringify(agenda))
+}
+
+function CargarLocal(){
+    let datos = localStorage.getItem("agenda")
+    if(datos){
+        agenda = JSON.parse(datos)
+    }
+    mostrarAgenda()
+}
+
+function guardarDatos(){
+
+    let contacto = {
+        nombre: document.getElementById("nombre").value,
+        direccion: document.getElementById("direccion").value,
+        telefono: document.getElementById("telefono").value,
+        email: document.getElementById("email").value,
+        urlFoto: document.getElementById("urlFoto").value
+    }
+
+    agenda.push(contacto)
+    GuardarLocal()
+    mostrarAgenda()
+}
+
+function guardarEditar(){
+
+    agenda[indice].nombre = document.getElementById("enombre").value
+    agenda[indice].direccion = document.getElementById("edireccion").value
+    agenda[indice].telefono = document.getElementById("etelefono").value
+    agenda[indice].email = document.getElementById("eemail").value
+    agenda[indice].urlFoto = document.getElementById("eurlFoto").value
+
+    GuardarLocal()
+    mostrarAgenda()
+    cerrarModal()
+}
+
+function cerrarModal(){
+    document.getElementById("miModal").close()
+}
+
+function editarContacto(index){
+
+    indice = index
+
+    document.getElementById("enombre").value = agenda[index].nombre
+    document.getElementById("edireccion").value = agenda[index].direccion
+    document.getElementById("etelefono").value = agenda[index].telefono
+    document.getElementById("eemail").value = agenda[index].email
+    document.getElementById("eurlFoto").value = agenda[index].urlFoto
+
+    document.getElementById("miModal").showModal()
+}
+
+function eliminarContacto(index){
+
+    if(confirm("¿Eliminar contacto?")){
+        agenda.splice(index,1)
+        GuardarLocal()
+        mostrarAgenda()
+    }
+}
+
+function mostrarAgenda(){
+
+    let listado = document.getElementById("listado")
+    let html = "<h2>Contactos:</h2>"
+
+    for(let i=0; i<agenda.length; i++){
+
+        html += `
+        <div>
+            <img src="${agenda[i].urlFoto}" width="80"><br>
+            ${agenda[i].nombre}<br>
+            ${agenda[i].direccion}<br>
+            ${agenda[i].telefono}<br>
+            ${agenda[i].email}<br>
+
+            <button onclick="editarContacto(${i})">Editar</button>
+            <button onclick="eliminarContacto(${i})">Eliminar</button>
+            <hr>
+        </div>
+        `
+    }
+
+    listado.innerHTML = html
+
+    // contador (RETO)
+    document.getElementById("contador").innerText = agenda.length
+}
+
+function buscar(){
+
+    let texto = document.getElementById("busqueda").value.toLowerCase()
+    let listado = document.getElementById("listado")
+    let html = "<h2>Resultados:</h2>"
+
+    for(let i=0; i<agenda.length; i++){
+
+        let c = agenda[i]
+
+        if(
+            c.nombre.toLowerCase().includes(texto) ||
+            c.direccion.toLowerCase().includes(texto) ||
+            c.telefono.includes(texto) ||
+            c.email.toLowerCase().includes(texto)
+        ){
+
+            html += `
+            <div>
+                <img src="${c.urlFoto}" width="80"><br>
+                ${c.nombre}<br>
+                ${c.direccion}<br>
+                ${c.telefono}<br>
+                ${c.email}<br>
+                <hr>
+            </div>
+            `
+        }
+    }
+
+    listado.innerHTML = html
+}
+
+CargarLocal()
+
+</script>
+
+</body>
+</html>
