@@ -1,0 +1,27 @@
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    margin: 20px;
+}
+
+.container {
+    display: flex;
+    gap: 30px;
+}
+
+.box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 45%;
+}
+
+button {
+    margin-top: 5px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+img {
+    margin-top: 5px;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Inventario POO</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<h1> Sistema de Inventario y Ventas</h1>
+
+<div class="container">
+
+<div class="box">
+<h2>Alta de Producto</h2>
+
+<input id="nombre" placeholder="Nombre">
+<input id="cantidad" type="number" placeholder="Cantidad">
+<input id="precio" type="number" placeholder="Precio">
+<input id="imagen" placeholder="URL Imagen">
+
+<button onclick="agregarProducto()">Agregar</button>
+
+<h2>Inventario</h2>
+<ul id="lista"></ul>
+</div>
+
+<div class="box">
+<h2>Carrito</h2>
+<ul id="carritoLista"></ul>
+
+<h3 id="total">Total: $0</h3>
+
+<button onclick="vender()">Vender</button>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
