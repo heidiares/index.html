@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Inventario</title>
+</head>
+
+<body>
+<div id="App">
+    <form id="formulario">
+        <label>Codigo:
+            <input type="text" id="txtCod">
+        </label>
+
+        <label>Nombre:
+            <input type="text" id="txtNom">
+        </label>
+
+        <label>Cantidad:
+            <input type="number" id="txtCant">
+        </label>
+
+        <label>Costo:
+            <input type="number" id="txtCost">
+        </label>
+
+        <button type="button" id="btnAdd">Agregar</button>
+        <button type="button" id="btnInicio">Agregar al inicio</button>
+        <button type="button" id="btnInsert">Insertar</button>
+        <button type="button" id="btnDel">Borrar</button>
+        <button type="button" id="btnBuscar">Buscar</button>
+        <button type="button" id="btnList">Listar</button>
+        <button type="button" id="btnExtraer">Extraer primero</button>
+        <button type="button" id="btnCancel">Cancelar</button>
+    </form>
+
+    <div id="detalles"></div>
+</div>
+
+<script>
+class Producto {
+    constructor(codigo, nombre, cantidad, precio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
+    infoHtml() {
+        return `
+        <div>
+            <h3>Código: ${this.codigo}</h3>
+            <h4>Nombre: ${this.nombre}</h4>
+            <p>$${this.precio} (${this.cantidad})</p>
+        </div>
+        `;
+    }
+}
+
+class Inventario {
+    constructor() {
+        this.datos = [];
+    }
+
+    agregar(producto) {
+        this.datos.push(producto);
+    }
+
+    agregarInicio(nuevo) {
+        let aux = [];
+
+        while (this.datos.length > 0) {
+            aux.push(this.datos.pop());
+        }
+
+        this.datos.push(nuevo);
+
+        while (aux.length > 0) {
+            this.datos.push(aux.pop());
+        }
+    }
+
+    listar() {
+        let texto = "";
+        for (let i = 0; i < this.datos.length; i++) {
+            texto += this.datos[i].infoHtml();
+        }
+        return texto;
+    }
+
+    buscar(codigo) {
+        let aux = [];
+        let encontrado = null;
+
+        while (this.datos.length > 0) {
+            let temp = this.datos.pop();
+            if (temp.codigo == codigo && encontrado == null) {
+                encontrado = temp;
+            }
+            aux.push(temp);
+        }
+
+        while (aux.length > 0) {
+            this.datos.push(aux.pop());
+        }
+
+        return encontrado;
+    }
+
+    eliminar(codigo) {
+        let aux = [];
+        let eliminado = null;
+
+        while (this.datos.length > 0) {
+            let temp = this.datos.pop();
+            if (temp.codigo == codigo && eliminado == null) {
+                eliminado = temp;
+            } else {
+                aux.push(temp);
+            }
+        }
+
+        while (aux.length > 0) {
+            this.datos.push(aux.pop());
+        }
+
+        return eliminado;
+    }
+
+    insertar(pos, nuevo) {
+        let aux = [];
+
+        while (this.datos.length > pos) {
+            aux.push(this.datos.pop());
+        }
+
+        this.datos.push(nuevo);
+
+        while (aux.length > 0) {
+            this.datos.push(aux.pop());
+        }
+    }
+
+    extraerPrimero() {
+        let aux = [];
+
+        while (this.datos.length > 1) {
+            aux.push(this.datos.pop());
+        }
+
+        let primero = this.datos.pop();
+
+        while (aux.length > 0) {
+            this.datos.push(aux.pop());
+        }
+
+        return primero;
+    }
+}
+
+let miInvent = new Inventario();
+
+const btnAdd = document.getElementById("btnAdd");
+const btnInicio = document.getElementById("btnInicio");
+const btnInsert = document.getElementById("btnInsert");
+const btnList = document.getElementById("btnList");
+const btnDel = document.getElementById("btnDel");
+const btnBuscar = document.getElementById("btnBuscar");
+const btnExtraer = document.getElementById("btnExtraer");
+const btnCancel = document.getElementById("btnCancel");
+
+const detalles = document.getElementById("detalles");
+const formulario = document.getElementById("formulario");
+
+function getDatos() {
+    return new Producto(
+        document.getElementById("txtCod").value,
+        document.getElementById("txtNom").value,
+        parseInt(document.getElementById("txtCant").value),
+        parseFloat(document.getElementById("txtCost").value)
+    );
+}
+
+btnAdd.addEventListener("click", () => {
+    let p = getDatos();
+    miInvent.agregar(p);
+    detalles.innerHTML += `<p>Se agregó ${p.nombre}</p>`;
+});
+
+btnInicio.addEventListener("click", () => {
+    let p = getDatos();
+    miInvent.agregarInicio(p);
+    detalles.innerHTML += `<p>Agregado al inicio: ${p.nombre}</p>`;
+});
+
+btnInsert.addEventListener("click", () => {
+    let pos = parseInt(prompt("Posición:"));
+    let p = getDatos();
+    miInvent.insertar(pos, p);
+    detalles.innerHTML += `<p>Insertado en posición ${pos}</p>`;
+});
+
+btnList.addEventListener("click", () => {
+    detalles.innerHTML += miInvent.listar();
+});
+
+btnDel.addEventListener("click", () => {
+    let cod = document.getElementById("txtCod").value;
+    let eliminado = miInvent.eliminar(cod);
+
+    detalles.innerHTML += eliminado
+        ? `<p>Eliminado: ${eliminado.nombre}</p>`
+        : `<p>No encontrado</p>`;
+});
+
+btnBuscar.addEventListener("click", () => {
+    let cod = document.getElementById("txtCod").value;
+    let encontrado = miInvent.buscar(cod);
+
+    detalles.innerHTML += encontrado
+        ? encontrado.infoHtml()
+        : `<p>No encontrado</p>`;
+});
+
+btnExtraer.addEventListener("click", () => {
+    let primero = miInvent.extraerPrimero();
+
+    if (primero) {
+        detalles.innerHTML += `<p>Extraído: ${primero.nombre}</p>`;
+    }
+});
+
+btnCancel.addEventListener("click", () => {
+    formulario.reset();
+    detalles.innerHTML = "";
+});
+</script>
+
+</body>
+</html>
