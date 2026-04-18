@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Inventario</title>
+<style>
+body { font-family: Arial; }
+input, button { margin: 5px; }
+
+#detalles {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid black;
+    height: 220px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Inventario de Productos</h2>
+
+<form id="formulario">
+    <input type="text" id="txtCod" placeholder="Código">
+    <input type="text" id="txtNom" placeholder="Nombre">
+    <input type="number" id="txtCant" placeholder="Cantidad">
+    <input type="number" id="txtCost" placeholder="Costo">
+    <br>
+    <button type="button" id="btnAdd">Agregar</button>
+    <button type="button" id="btnBuscar">Buscar</button>
+    <button type="button" id="btnEliminar">Eliminar</button>
+    <button type="button" id="btnListar">Listar</button>
+    <button type="button" id="btnExtraer">Extraer primero</button>
+    <button type="button" id="btnCancelar">Cancelar</button>
+</form>
+
+<h3>Movimientos</h3>
+<div id="detalles"></div>
+
+<script>
+class Producto {
+    constructor(codigo, nombre, cantidad, precio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
+    infoTexto() {
+        return "Código: " + this.codigo + " | Nombre: " + this.nombre +
+               " | Cantidad: " + this.cantidad + " | Precio: $" + this.precio;
+    }
+}
+
+class Inventario {
+    constructor() {
+        this.datos = [];
+    }
+
+    agregar(nuevo) {
+        if (this.datos.length === 0 || this.datos[this.datos.length - 1].codigo <= nuevo.codigo) {
+            this.datos.push(nuevo);
+            return;
+        }
+        let temp = this.datos.pop();
+        this.agregar(nuevo);
+        this.datos.push(temp);
+    }
+
+    listarTexto() {
+        let texto = "LISTADO:\n";
+        for (let i = 0; i < this.datos.length; i++) {
+            texto += this.datos[i].infoTexto() + "\n";
+        }
+        return texto;
+    }
+
+    buscar(codigo) {
+        if (this.datos.length === 0) return null;
+
+        let temp = this.datos.pop();
+
+        if (temp.codigo == codigo) {
+            this.datos.push(temp);
+            return temp;
+        }
+
+        let res = this.buscar(codigo);
+        this.datos.push(temp);
+        return res;
+    }
+
+    eliminar(codigo) {
+        if (this.datos.length === 0) return null;
+
+        let temp = this.datos.pop();
+
+        if (temp.codigo == codigo) {
+            return temp;
+        }
+
+        let res = this.eliminar(codigo);
+        this.datos.push(temp);
+        return res;
+    }
+
+    extraerPrimero() {
+        let temp = this.datos.pop();
+
+        if (this.datos.length === 0) {
+            return temp;
+        }
+
+        let primero = this.extraerPrimero();
+        this.datos.push(temp);
+        return primero;
+    }
+}
+
+let inventario = new Inventario();
+let detalles = document.getElementById("detalles");
+
+function getDatos() {
+    return new Producto(
+        document.getElementById("txtCod").value,
+        document.getElementById("txtNom").value,
+        parseInt(document.getElementById("txtCant").value),
+        parseFloat(document.getElementById("txtCost").value)
+    );
+}
+
+function agregarMovimiento(texto) {
+    detalles.innerHTML += "<pre>" + texto + "</pre>";
+    detalles.scrollTop = detalles.scrollHeight;
+}
+
+document.getElementById("btnAdd").onclick = function() {
+    let p = getDatos();
+    inventario.agregar(p);
+    agregarMovimiento("Agregado:\n" + p.infoTexto());
+};
+
+document.getElementById("btnBuscar").onclick = function() {
+    let cod = document.getElementById("txtCod").value;
+    let res = inventario.buscar(cod);
+
+    if (res) {
+        agregarMovimiento("Encontrado:\n" + res.infoTexto());
+    } else {
+        agregarMovimiento("No encontrado");
+    }
+};
+
+document.getElementById("btnEliminar").onclick = function() {
+    let cod = document.getElementById("txtCod").value;
+    let res = inventario.eliminar(cod);
+
+    if (res) {
+        agregarMovimiento("Eliminado:\n" + res.infoTexto());
+    } else {
+        agregarMovimiento("No encontrado");
+    }
+};
+
+document.getElementById("btnListar").onclick = function() {
+    agregarMovimiento(inventario.listarTexto());
+};
+
+document.getElementById("btnExtraer").onclick = function() {
+    let res = inventario.extraerPrimero();
+
+    if (res) {
+        agregarMovimiento("Extraído:\n" + res.infoTexto());
+    }
+};
+
+document.getElementById("btnCancelar").onclick = function() {
+    document.getElementById("formulario").reset();
+    detalles.innerHTML = "";
+};
+</script>
+
+</body>
+</html>
