@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Personas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Sistema de Personas</h2>
+
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="number" id="edad" placeholder="Edad">
+
+    <select id="tipo">
+        <option value="">Seleccione tipo</option>
+        <option value="persona">Persona</option>
+        <option value="estudiante">Estudiante</option>
+        <option value="profesor">Profesor</option>
+    </select>
+
+    <input type="text" id="extra1" placeholder="Carrera / Materias">
+    <input type="text" id="extra2" placeholder="Semestre (solo estudiante)">
+
+    <button onclick="registrar()">Registrar</button>
+    <button onclick="actualizar()">Actualizar</button>
+    <button onclick="limpiar()">Limpiar</button>
+    <button onclick="mostrar()">Mostrar</button>
+
+    <input type="text" id="buscarNombre" placeholder="Buscar nombre">
+    <button onclick="buscar()">Buscar</button>
+
+    <input type="number" id="numeroEliminar" placeholder="Número eliminar">
+    <button onclick="eliminar()">Eliminar</button>
+
+   
+    <div id="resultado"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
