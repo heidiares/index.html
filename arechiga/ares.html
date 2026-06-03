@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remodelaciones Arechiga</title>
+    <style>
+        :root {
+            --fondo: #f6f5f2;
+            --primario: #2f4f4f;
+            --secundario: #f6a623;
+            --terciario: #ffffff;
+            --texto: #333333;
+            --bordes: rgba(47,79,79,0.15);
+            --sombra: 0 20px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f3f2ef 0%, #ffffff 100%);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        header {
+            background: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            margin-bottom: 1rem;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            max-width: 720px;
+        }
+
+        .hero-buttons {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .hero-buttons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.95rem 1.8rem;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--secundario);
+            color: white;
+            box-shadow: 0 12px 24px rgba(246, 166, 35, 0.28);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primario);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-buttons a:hover {
+            transform: translateY(-2px);
+        }
+
+        main {
+            max-width: 1180px;
+            margin: -4rem auto 2rem;
+            padding: 0 1.5rem 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--sombra);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--bordes);
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            color: var(--primario);
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .service {
+            background: #fdf7ef;
+            padding: 1.6rem;
+            border-radius: 20px;
+            border: 1px solid rgba(246, 166, 35, 0.1);
+        }
+
+        .service h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .service p {
+            color: #5f5f5f;
+        }
+
+        .about {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .about div {
+            min-height: 280px;
+        }
+
+        .about img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #2f4f4f 0%, #3e5c5c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 24px;
+        }
+
+        .cta h2 {
+            margin-bottom: 0.75rem;
+        }
+
+        .cta p {
+            margin-bottom: 1rem;
+            max-width: 620px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: #6f6f6f;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                min-height: 65vh;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="hero-content">
+            <p>Expertos en remodelaciones residenciales y comerciales</p>
+            <h1>Transformamos espacios con estilo, calidad y confianza</h1>
+            <p>Diseños personalizados, materiales de primera y atención completa desde la primera consulta hasta la entrega final.</p>
+            <div class="hero-buttons">
+                <a href="#servicios" class="btn-primary">Ver servicios</a>
+                <a href="#contacto" class="btn-secondary">Solicitar cotización</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="card" id="servicios">
+            <h2 class="section-title">Nuestros servicios</h2>
+            <div class="grid grid-3">
+                <article class="service">
+                    <h3>Remodelación de cocinas</h3>
+                    <p>Renovamos cocinas modernas y funcionales con mobiliario a medida, iluminación inteligente y acabados resistentes.</p>
+                </article>
+                <article class="service">
+                    <h3>Baños y vestidores</h3>
+                    <p>Espacios elegantes y prácticos con asesoría en diseño, instalación de sanitarios y detalles de lujo.</p>
+                </article>
+                <article class="service">
+                    <h3>Interiorismo integral</h3>
+                    <p>Diseño completo de salas, oficinas y locales comerciales que refleja tu identidad y maximiza el confort.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="card about">
+            <div>
+                <h2 class="section-title">¿Por qué elegirnos?</h2>
+                <p>Somos un equipo de remodeladores comprometidos con la puntualidad, el presupuesto transparente y la satisfacción total del cliente. Cada proyecto recibe supervisión profesional y soluciones adaptadas a tus necesidades.</p>
+                <ul style="margin-top: 1rem; list-style: none; padding-left: 0; color: #484848;">
+                    <li>• Evaluación gratuita y propuesta personalizada</li>
+                    <li>• Materiales de calidad y acabados duraderos</li>
+                    <li>• Garantía en mano de obra y soporte post-entrega</li>
+                </ul>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80" alt="Remodelación de espacio moderno">
+            </div>
+        </section>
+
+        <section class="card" id="contacto">
+            <h2 class="section-title">Contáctanos</h2>
+            <p>Solicita tu presupuesto sin compromiso y comienza el proceso de remodelación con asesoría experta.</p>
+            <div class="hero-buttons" style="justify-content: flex-start; margin-top: 1rem;">
+                <a href="mailto:contacto@remodelacionesarechiga.com" class="btn-primary">Enviar email</a>
+                <a href="tel:+525512345678" class="btn-secondary">Llamar ahora</a>
+            </div>
+        </section>
+
+        <section class="card cta">
+            <div>
+                <h2>¿Listo para renovar tu espacio?</h2>
+                <p>Contáctanos hoy y descubre cómo una remodelación bien planificada puede transformar tu hogar o negocio.</p>
+            </div>
+            <a href="#contacto" class="btn-primary" style="white-space: nowrap;">Agenda tu visita</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Remodelaciones Arechiga © 2026 | Diseño y renovaciones para tu hogar y negocio</p>
+    </footer>
+</body>
+</html>
